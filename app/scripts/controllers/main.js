@@ -48,8 +48,9 @@ angular.module('yeomanContactsApp')
 		            success: function(results) {
 		              $scope.$apply(function(){
 		                $rootScope.App.model = results.map(function(obj){
+											
 		                  return {  
-		                    id: obj.get('id'),
+		                    id: obj.id,
 		                    name: obj.get('name'),
 		                    phone: obj.get('phone'),
 		                    website: obj.get('website'),

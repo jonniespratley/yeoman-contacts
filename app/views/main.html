@@ -9,7 +9,7 @@
        
         <ul class="contacts unstyled">
            <li class="contact well well-small clearfix" ng-repeat="item in App.model | filter:query | limitTo:limit | orderBy:order:reverse">
-           <a class="pull-left thumb" ng-href="/view/{{$index}}">
+           <a class="pull-left thumb" ng-href="#/details/{{item.id}}">
              <img class="media-object" ng-src="{{item.avatar}}">
            </a>
            <div class="media-body">
@@ -26,3 +26,4 @@
          </li>
         </ul>
       </section>
+ 
