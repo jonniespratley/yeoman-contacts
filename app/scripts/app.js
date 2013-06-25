@@ -1,29 +1,19 @@
 'use strict';
 
 angular.module('yeomanContactsApp', [])
-  .config(function ($routeProvider, $locationProvider, $q, $timeout) {
-		var routeResolver = {
-			delay : function ($q, $timeout) {
-				var delay = $q.defer();
-				$timeout(delay.resolve, 500);
-				return delay.promise;
-			}
-		};
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-	resolve:routeResolver
+        controller: 'MainCtrl'
       })
       .when('/home', {
         templateUrl: 'views/home.html',
-        controller: 'HomeCtrl',
-	resolve:routeResolver
+        controller: 'HomeCtrl'
       })
       .when('/details/:id', {
         templateUrl: 'views/details.html',
-        controller: 'DetailsCtrl',
-				resolve:routeResolver
+        controller: 'DetailsCtrl'
       })
       .otherwise({
         redirectTo: '/'
