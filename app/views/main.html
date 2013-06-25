@@ -1,9 +1,28 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
-</div>
+<section ng-init="App.getContacts()">
+       <p ng-show="App.loading">
+          <i class="icon-spinner icon-spin icon-large"></i> Please wait while loading content..
+        </p>
+        
+         <form class="form-search">
+           <input type="text" ng-model="$.query" class="span12 search-query" placeholder="Filter by name"/>
+         </form>
+       
+        <ul class="contacts unstyled">
+           <li class="contact well well-small clearfix" ng-repeat="item in App.model | filter:query | limitTo:limit | orderBy:order:reverse">
+           <a class="pull-left thumb" ng-href="/view/{{$index}}">
+             <img class="media-object" ng-src="{{item.avatar}}">
+           </a>
+           <div class="media-body">
+             <h4 class="media-heading">
+               {{item.name}}
+             </h4>
+             <p class="meta">
+               <ul class="unstyled">
+                 <li class="phone"><a href="tel:{{item.phone}}"><i class="icon-phone"></i> {{item.phone}}</a></li>
+                 <li class="email"><a href="mailto:{{item.email}}"><i class="icon-envelope"></i> {{item.email}}</a></li>
+               </ul>
+             </p>
+           </div>
+         </li>
+        </ul>
+      </section>

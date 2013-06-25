@@ -1,1 +1,29 @@
 /* Will be compiled down to a single stylesheet with your sass files */
+body { 
+  background-color: #fff; 
+  padding: 0; 
+  margin: 8px; 
+}
+
+.jasmine_reporter { 
+  background-color: #eee; 
+  margin: 0; 
+}
+.contact:hover{
+  cursor: pointer;
+  border: 1px solid #888;
+}
+.contact a{
+  color: #777;
+}
+.contact a:hover{
+  text-decoration: none;
+}
+.contact .email, .contact .phone{
+  font-size: .9em;
+  white-space: nowrap;
+  color: #777;
+}
+.contact .thumb{
+  margin-right: 10px;
+}
