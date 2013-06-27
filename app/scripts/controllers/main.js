@@ -1,12 +1,14 @@
 	'use strict';
 angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $rootScope, ContactsService) {
 	$scope.App = {
-		icon: 'book',
-		name: 'AngularJS Contacts',
+		config:{
+			icon: 'book',
+			name: 'AngularJS Contacts'
+		},
 		loading: true,
 		model: null,
 		nav: [
-			{ title: 'Add Contact', href:'/add' }
+			//{ title: 'Add Contact', href:'/add' }
 		],
 		filter:{
 			limit: 10,
@@ -23,6 +25,10 @@ angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $roo
 					$scope.App.model = data;
 				});
 			});	 
+		},
+		selectContact: function(obj){
+			$rootScope.selectedContact = obj;
 		}
 	};
+	$rootScope.App = $scope.App;
 });

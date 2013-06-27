@@ -1,8 +1,8 @@
 'use strict';
 //Contacts Service - Connects to Parse.com and fetches the data.
 angular.module('yeomanContactsApp').factory('ContactsService', ['$q', function($q){
+	Parse.initialize('mNf6N9zKOa0iqoyhXjlnNWQiJATFWkcb5ukvuOkX', 'tjgFaPiYlrTPbNkI0qu62RSl4tE8VH0y0W7yF687');
 	return function(successCb, errorCb){
-		Parse.initialize('mNf6N9zKOa0iqoyhXjlnNWQiJATFWkcb5ukvuOkX', 'tjgFaPiYlrTPbNkI0qu62RSl4tE8VH0y0W7yF687');
 		var	query = new Parse.Query('Contact'),
 				delay = $q.defer(),
 				data = null;
@@ -10,7 +10,7 @@ angular.module('yeomanContactsApp').factory('ContactsService', ['$q', function($
 				success: function(results) {
 					data = results.map(function(obj){
 						return {	
-							id: obj.get('objectId'),
+							id: obj.id,
 							name: obj.get('name'),
 							phone: obj.get('phone'),
 							website: obj.get('website'),

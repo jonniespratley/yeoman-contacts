@@ -1,6 +1,6 @@
 'use strict';
-angular.module('yeomanContactsApp').controller('DetailsCtrl', function ($scope, $rootScope) {
-	$scope.awesomeThings = ['HTML5 Boilerplate','AngularJS','Karma'];
-	console.log($rootScope);
+angular.module('yeomanContactsApp').controller('DetailsCtrl', function ($scope, $rootScope, $routeParams) {
 	$scope.App = $rootScope.App;
+//	$scope.contact = $rootScope.App.model[$routeParams.id];
+	console.log($rootScope);
 });

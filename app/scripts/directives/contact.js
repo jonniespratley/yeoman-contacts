@@ -2,7 +2,7 @@
 angular.module('yeomanContactsApp').directive('contact', function () {
 	return {
 		template: '<li id="contact-{{$index}}" class="contact well well-small clearfix">'
-						  +'<a class="pull-left thumb" ng-href="/view/{{$index}}"><img class="media-object" ng-src="{{item.avatar}}"></a>'
+						  +'<a class="pull-left thumb" ng-href="#/details/{{item.id}}"><img class="media-object" ng-src="{{item.avatar}}"></a>'
 							+'	<div class="media-body">'
 						  +'      <h4 class="media-heading">{{item.name}}</h4>'
 						  +'      <p class="meta">'
