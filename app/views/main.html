@@ -1,29 +1,28 @@
 <section ng-init="App.getContacts()">
-       <p ng-show="App.loading">
-          <i class="icon-spinner icon-spin icon-large"></i> Please wait while loading content..
+	<p ng-show="App.loading">
+		<i class="icon-spinner icon-spin icon-large"></i> Please wait while loading content..
+	</p>
+	<ul class="contacts unstyled">
+		<li ng-repeat="item in App.model | filter:App.filter.query | limitTo:App.filter.limit | orderBy:App.filter.order:App.filter.reverse">
+			<contact ng-model="item"></contact>
+		</li>
+	</ul>
+</section>
+
+<!-- @TODO: [Contact Directive] -->
+<script id="contact_directive.html" type="text/ng-template">
+	<li id="contact-{{$index}}" class="contact well well-small clearfix">
+		<a class="pull-left thumb" ng-href="/view/{{$index}}">
+        <img class="media-object" ng-src="{{item.avatar}}">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">{{item.name}}</h4>
+        <p class="meta">
+          <ul class="unstyled">
+            <li class="phone"><a href="tel:{{item.phone}}"><i class="icon-phone"></i> {{item.phone | tel}}</a></li>
+            <li class="email"><a href="mailto:{{item.email}}"><i class="icon-envelope"></i> {{item.email}}</a></li>
+          </ul>
         </p>
-        
-         <form class="form-search">
-           <input type="text" ng-model="$.query" class="span12 search-query" placeholder="Filter by name"/>
-         </form>
-       
-        <ul class="contacts unstyled">
-           <li class="contact well well-small clearfix" ng-repeat="item in App.model | filter:query | limitTo:limit | orderBy:order:reverse">
-           <a class="pull-left thumb" ng-href="#/details/{{item.id}}">
-             <img class="media-object" ng-src="{{item.avatar}}">
-           </a>
-           <div class="media-body">
-             <h4 class="media-heading">
-               {{item.name}}
-             </h4>
-             <p class="meta">
-               <ul class="unstyled">
-                 <li class="phone"><a href="tel:{{item.phone}}"><i class="icon-phone"></i> {{item.phone}}</a></li>
-                 <li class="email"><a href="mailto:{{item.email}}"><i class="icon-envelope"></i> {{item.email}}</a></li>
-               </ul>
-             </p>
-           </div>
-         </li>
-        </ul>
-      </section>
- 
+      </div>
+  </li>
+</script>
