@@ -280,7 +280,26 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('build:q', [
+    'clean:dist',
+    //'jshint',
+    //'test',
+    'coffee',
+    'compass:dist',
+    'useminPrepare',
+    'imagemin',
+    'cssmin',
+    'htmlmin',
+    'concat',
+    'copy',
+    'cdnify',
+    'ngmin',
+    'uglify',
+    'rev',
+    'usemin'
+  ]);  
+
+	grunt.registerTask('build', [
     'clean:dist',
     'jshint',
     'test',

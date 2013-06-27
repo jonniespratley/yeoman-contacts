@@ -20,6 +20,8 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "angular": false
+    "angular": true,
+    "jasmine": true,
+    "Parse": true
   }
 }

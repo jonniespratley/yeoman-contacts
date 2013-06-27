@@ -9,6 +9,8 @@ files = [
   JASMINE_ADAPTER,
   'app/components/angular/angular.js',
   'app/components/angular-mocks/angular-mocks.js',
+  'app/libs/md5.js',
+	'http://www.parsecdn.com/js/parse-1.2.8.min.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
   'test/mock/**/*.js',
@@ -16,7 +18,10 @@ files = [
 ];
 
 // list of files to exclude
-exclude = [];
+exclude = [
+	'app/scripts/appSpec.js',
+	'app/scripts/jasmineBootstrap.js'
+];
 
 // test results reporter to use
 // possible values: dots || progress || growl

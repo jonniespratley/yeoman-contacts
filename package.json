@@ -1,6 +1,6 @@
 {
   "name": "yeoman-contacts",
-  "version": "0.0.0",
+  "version": "0.0.1-1",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -28,5 +28,9 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "subdomain": "jonniespratley-yeoman-contacts",
+  "scripts": {
+    "start": "node server"
   }
 }
