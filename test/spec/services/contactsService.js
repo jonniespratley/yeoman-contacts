@@ -3,7 +3,7 @@
 describe('Service: contactsService', function () {
 
   // load the service's module
-  beforeEach(module('yeomanContactsApp'));
+  //beforeEach(module('yeomanContactsApp'));
 
   // instantiate service
   var contactsService;

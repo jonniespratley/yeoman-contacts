@@ -11,9 +11,9 @@ describe('Filter: tel', function () {
     tel = $filter('tel');
   }));
 
-  it('should return the input prefixed with "tel filter:"', function () {
-    var text = 'angularjs';
-    expect(tel(text)).toBe('tel filter: ' + text);
-  });
+	it('should return the string formated as (555)555-5555', function () {
+	    var text = '555-555-5555';
+	    expect(tel(text)).toBe('(555)555-5555');
+	  });
 
 });

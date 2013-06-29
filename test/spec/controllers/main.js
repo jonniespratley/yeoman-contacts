@@ -16,7 +16,23 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
+	 //Tests on the Main controller
+	  it('should say AngularJS Contacts', function() {
+	    expect(scope.App.name).toEqual('AngularJS Contacts');
+	  });
+
+ 		it("should try to call the service, but we intercept it", inject(function(ContactsService) {
+	    //spyOn($scope.App, 'getContacts').andReturn([1, 2, 3]);
+	    //expect($scope.App.model).toBe(3);
+	  }));
+
+	  it('should fetch names from server on load', function() {
+	    // Initially, the request has not returned a response
+	    //expect(scope.App.model).toBeNull();
+	    // Tell the fake backend to return responses to all current requests that are in flight.
+	    //mockBackend.flush();
+	    // Now App.model should be set on the scope
+	    //expect(scope.App.model).toBe(3);
+	  });
+
 });

@@ -1,10 +1,12 @@
-/* Will be compiled down to a single stylesheet with your sass files */
-body { 
-  background-color: #fff; 
-  padding: 0; 
-  margin: 8px; 
-}
+/* Will be compiled down to a single stylesheet with your sass files 
+*/
+@import url('//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css');
+@import url('//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css');
 
+body, html { 
+  background-color: #fff; 
+  padding: 35px 5px;  
+}
 .jasmine_reporter { 
   background-color: #eee; 
   margin: 0; 
@@ -26,4 +28,36 @@ body {
 }
 .contact .thumb{
   margin-right: 10px;
+}
+footer{
+	text-align: center;
+	font-size: .9em;
+	padding:25px 5px;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) { 
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+	body, html { 
+	  padding: 0px;  
+	}
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	body, html { 
+	  padding: 0px;  
+	}
+	
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	body, html { 
+	  padding: 0px 5px;  
+	}
+	
 }

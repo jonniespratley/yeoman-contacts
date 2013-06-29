@@ -10,6 +10,7 @@ angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $roo
 		nav: [
 			//{ title: 'Add Contact', href:'/add' }
 		],
+		contact: null,
 		filter:{
 			limit: 10,
 			order: 'name',
@@ -27,6 +28,7 @@ angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $roo
 			});	 
 		},
 		selectContact: function(obj){
+			$rootScope.App.contact = obj;
 			$rootScope.selectedContact = obj;
 		}
 	};
