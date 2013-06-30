@@ -1,31 +1,39 @@
 <div id="contact-row" class="row-fluid">
-	<div class="span7">
+	<div class="span6">
 		<div id="contact-form">
-			<form class="form-horizontal">
+			<legend>Details</legend>
+			<form class="form-horizontal" ng-submit="App.saveContact(contact);">
 		         <div class="control-group">
 		           <label class="control-label">Name:</label>
 		           <div class="controls">
-		             <input type="text" class="input--level input-large" placeholder="Your Name"> 
+		             <input type="text" class="input--level input-large" placeholder="Your Name" ng-model="contact.name"> 
 		           </div>
 		         </div>
 		         <div class="control-group">
 		           <label class="control-label">Email:</label>
 		           <div class="controls">
-		             <input type="email" class="input--level input-large" placeholder="Your Email"> 
+		             <input type="email" class="input--level input-large" placeholder="Your Email" ng-model="contact.email"> 
 		           </div>
 		         </div>
 		         <div class="control-group">
 		           <label class="control-label">Phone:</label>
 		           <div class="controls">
-		             <input type="tel" class="input--level input-large" placeholder="Your Phone"> 
+		             <input type="tel" class="input--level input-large" placeholder="Your Phone" ng-model="contact.phone"> 
 		           </div>
 		         </div>
 		         <div class="control-group">
 		           <label class="control-label">Website:</label>
 		           <div class="controls">
-		             <input type="url" class="input--level input-large" placeholder="Your Website"> 
+		             <input type="url" class="input--level input-large" placeholder="Your Website" ng-model="contact.website"> 
 		           </div>
 		         </div>
+				<div class="form-actions">
+					<a href="/" class="btn">Cancel</a>
+					<input type="button" name="delete" value="Delete" class="btn btn-danger" ng-click="App.removeContact(contact);"/>
+					<input type="submit" name="save" value="Save" class="btn btn-success"/>
+				</div>
+		<!--
+
 		         <div class="control-group">
 		           <label class="control-label">Address:</label>
 		           <div class="controls">
@@ -44,10 +52,12 @@
 		             <input type="text" placeholder="Your State" class="input-large"> 
 		           </div>
 		         </div>
+		-->
 		       </form>
 		</div>
 	</div>
-	<div class="span5">
-		<img ng-src="{{contact.avatar}}"/>
+	<div class="span3">
+		<legend>Image</legend>
+		<img ng-src="{{contact.avatar}}" src="http://placehold.it/250x250&text=Avatar" class="img-polaroid"/>
 	</div>	
 </div>

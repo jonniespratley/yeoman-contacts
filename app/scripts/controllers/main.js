@@ -8,7 +8,8 @@ angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $roo
 		loading: true,
 		model: null,
 		nav: [
-			//{ title: 'Add Contact', href:'/add' }
+			{ title: 'List Contacts', href:'' },
+			{ title: 'Add Contact', href:'add' }
 		],
 		contact: null,
 		filter:{
@@ -30,6 +31,12 @@ angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $roo
 		selectContact: function(obj){
 			$rootScope.App.contact = obj;
 			$rootScope.selectedContact = obj;
+		},
+		saveContact: function(obj){
+			
+		},
+		removeContact: function(obj){
+			
 		}
 	};
 	$rootScope.App = $scope.App;

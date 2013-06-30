@@ -25,6 +25,12 @@ angular.module('yeomanContactsApp', []).config(function ($routeProvider, $locati
 			controller: 'DetailsCtrl',
 			resolve: routeResolver			
 		})
+		.when('/add', {
+			templateUrl: 'views/details.html',
+			controller: 'MainCtrl',
+			resolve: routeResolver			
+		})
+
 		.otherwise({
 			redirectTo: '/'
 	});
