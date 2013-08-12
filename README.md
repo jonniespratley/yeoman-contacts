@@ -1,55 +1,50 @@
-# How To: Yeoman Applications
-[Yeoman](http://yeoman.io) is more than just a toolset, It's a workflow; a collection of tools and best practices working together in harmony to help make developing applications for the web smoother than ever before.
+# Web Applications with Yeoman
 
-## Overview
-
-Is a combination of three tools for boosting developer productivity when creating applications of various types, which includes the following:
-
-![image](https://raw.github.com/yeoman/yeoman.io/gh-pages/media/workflow.jpg)
+In this article we will talk about using [Yeoman](http://yeoman.io), which is a client-side stack using three tools and frameworks to help developers quickly build beautiful and scalable web applications, these tools include support for linting, testing, minification and more. 
+![image](https://dl.dropboxusercontent.com/u/26906414/cdn/img/yeoman-banner-wide.png)
 
 1. **[Yo](http://yeoman.io)** is used to generate things, from other generators to files and more. 
 2. **[Bower](http://bower.io)** is used for dependency management, downloading and installing .js components.
 3. **[Grunt](http://gruntjs.com/)** is used for task management such as building, previewing and testing.
 
----
 
+## How To
 
-## Tutorial
-
- We are going to use all of these tools to create a [AngularJS](http://angularjs.org/) application, the ode is available on [Github](https://github.com/jonniespratley/yeoman-contacts) and the finished demo is available [here](http://). 
-
-
-![image](https://dl.dropboxusercontent.com/u/26906414/yeoman-contacts/localhost_full.png)
-
-### Getting Started
-In order to use Yeoman you need to install it and all of the dependencies.
+ We are going to use all of these tools to create a [AngularJS](http://angularjs.org/) application, the code is available on [Github](https://github.com/jonniespratley/yeoman-contacts) and the finished demo is available [here](http://jps-contacts.aws.af.cm/#/). 
 
 
 ### 1. Installing Yeoman
 Installation is pretty straight forward, the official build script does all the hard work for you. 
 
-Execute the following command:
-
-	$ curl -L get.yeoman.io | bash
-	
-### 2. Installing Dependencies
-	
-Then install `yo`, `grunt`, and `bower`:
+To install `yo`, `grunt`, and `bower`, execute the following command:
 
 	$ npm install -g yo grunt-cli bower
 
-If you have trouble getting it all working take look at the [Getting Started Wiki](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+
+If you run into installation issues please visit the [Getting Started Wiki](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+
+	
 
 
+### 2. Installing Generators
 
-### 3. Installing Generators
-Before you a project you need to install a generator; our project is going to use AngularJS so we install a Yeoman generator for AngularJS called [generator-angular](https://github.com/yeoman/generator-angular).
+Before development we need to install a generator, since we are going to utilize the AngularJS framework lets install the [Yeoman AngularJS generator](https://github.com/yeoman/generator-angular).
 
 	$ npm install -g generator-angular
 	
-For more documentation and examples please visit the [Github](https://github.com/yeoman/generator-angular) project.
+For documentation and how to create custom generators please visit the [wiki](https://github.com/yeoman/yeoman/wiki/Generators).
 
-**Available generators:** These are the available generators. 
+
+
+### 3. Creating the Project
+Lets create the directory where our project will be stored, execute the following command:
+
+	$ mkdir yeoman-contacts && cd yeoman-contacts
+
+
+Now we are ready to use the available generators to build our application.
+
+**Available generators:** 
 
 * angular:app
 * angular:controller
@@ -61,20 +56,40 @@ For more documentation and examples please visit the [Github](https://github.com
 
 *Note: Generators are to be run from the root directory of your app.*
 
-
-### 4. Creating the Project *(angular:app)*
-Creating a new project is easy, run this command:
-
-	$ mkdir yeoman-contacts && cd yeoman-contacts
+####a. Creating Application Structure `angular:app`
 	
-And then scaffold your project, execute the following command:
+Creating the initial directory contents and structure for our application is very easy, execute the following command:
 	
 	$ yo angular:app yeomanContactsApp
 
-The generator asks a few questions such as including [Twitter Bootstrap](http://twitter.github.io/bootstrap/index.html) and [AngularJS modules](http://ngmodules.org/).
+Which results in:
+
+	yeoman-contacts/
+	├── app
+	│   ├── 404.html
+	│   ├── favicon.ico
+	│   ├── index.html
+	│   ├── robots.txt
+	│   ├── components
+	│   │   ├── angular
+	│   │   ├── ...		
+	│   ├── scripts
+	│   │   ├── app.js
+	│   │   ├── controllers
+	│   │   │   └── main.js
+	│   ├── styles
+	│   │   └── main.css
+	│   └── views
+	│       └── main.html
+	├── component.json
+	├── Gruntfile.js
+	├── karma.conf.js
+	├── karma-e2e.conf.js
+	├── package.json
+	
 
 
-#### a. Creating Routes, Views, and Controllers *(angular:route)*
+####b.  Creating Routes, Views, and Controllers `angular:route`
 Adding a new route, view and controller to your application is easy with this single command:
 
 	$ yo angular:route home
@@ -88,11 +103,101 @@ Which results in:
 * Adds the `home.js` script include tag to your main app view `index.html` file.
 
 
+####c. Creating Controllers `angular:controller`
+
+With controllers, you provide the logic using JavaScript to power your views:
+
+	$ yo angular:controller main
+
+Which results in:
+
+* Creates a `main.js` controller skeleton in the  `app/scripts/controllers` folder.
+* Creates a `main.js` test spec skeleton in the `test/specs/controllers` folder.
+
+
+The controller logic for our application:
+
+**app/controllers/main.js**
+
+	angular.module('yeomanContactsApp').controller('MainCtrl', function($scope, $rootScope, ContactsService) {
+		$scope.App = {
+			config:{
+				icon: 'book',
+				name: 'AngularJS Contacts'
+			},
+			loading: true,
+			model: null,
+			nav: [
+				{ title: 'List Contacts', href:'' },
+				{ title: 'Add Contact', href:'add' }
+			],
+			contact: null,
+			filter:{
+				limit: 10,
+				order: 'name',
+				reverse: false,
+				query: null
+			},
+			init: function(){
+			},
+			getContacts: function(){
+				new ContactsService(function(data){
+					$scope.$apply(function(){
+						$scope.App.loading = false;
+						$scope.App.model = data;
+					});
+				});	 
+			},
+			selectContact: function(obj){
+				$rootScope.App.contact = obj;
+				$rootScope.selectedContact = obj;
+			},
+			saveContact: function(obj){
+				
+			},
+			removeContact: function(obj){
+				
+			}
+		};
+		$rootScope.App = $scope.App;
+	});
+
+
+A test for our main controller:  
+
+
+**test/spec/controllers/main.js**
+
+
+	describe('Controller: MainCtrl', function () {
+
+		// load the controller's module
+		beforeEach(module('yeomanContactsApp'));
+	
+		var MainCtrl,
+			scope;
+	
+		// Initialize the controller and a mock scope
+		beforeEach(inject(function ($controller, $rootScope) {
+			scope = $rootScope.$new();
+			MainCtrl = $controller('MainCtrl', {
+				$scope: scope
+			});
+		}));
+	
+		//Tests on the Main controller
+		it('should say AngularJS Contacts', function() {
+			expect(scope.App.name).toEqual('AngularJS Contacts');
+		});
+		
+	});
+
 
 
 
 	
-#### b. Creating Directives *(angular:directive)*
+####d. Creating Directives `angular:directive`
+
 With directives, you can extend HTML to add declarative syntax to your views:
 
 	$ yo angular:directive contact
@@ -105,32 +210,23 @@ Which results in:
 
 A custom directive for our application:
 
-	//app/scripts/directives/contact.js
+**app/scripts/directives/contact.js**
+
 	angular.module('yeomanContactsApp').directive('contact', function () {
 		return {
-			template: '<li id="contact-{{$index}}" class="contact well well-small clearfix">'
-							  +'<a class="pull-left thumb" ng-href="#/details/{{item.id}}"><img class="media-object" ng-src="{{item.avatar}}"></a>'
-							  +'	<div class="media-body">'
-							  +'      <h4 class="media-heading">{{item.name}}</h4>'
-							  +'      <p class="meta">'
-							  +'        <ul class="unstyled">'
-							  +'          <li class="phone"><a href="tel:{{item.phone}}"><i class="icon-phone"></i> {{item.phone | tel}}</a></li>'
-							  +'          <li class="email"><a href="mailto:{{item.email}}"><i class="icon-envelope"></i> {{item.email}}</a></li>'
-							  +'        </ul>'
-							  +'      </p>'
-							  +'    </div>'
-							  +'</li>',
+			templateUrl: 'views/contactDirective.html',
 			restrict: 'E',
 			link: function postLink(scope, element, attrs) {
+				element.addClass('contact');
 			}
 		};
 	});
-
 	
 
 A test for our directive:
 
-	//test/spec/directives/contact.js
+**test/spec/directives/contact.js**
+
 	describe('Directive: contact', function () {
 	
 	  //load the directive's module		
@@ -150,7 +246,7 @@ A test for our directive:
 
 
 
-#### c. Creating Filters *(angular:filter)*
+#### e. Creating Filters `angular:filter`
 Filters are used for formatting data displayed to the user:
 
 	$ yo angular:filter tel
@@ -164,7 +260,8 @@ Which results in:
 
 A custom filter for our application: 
 
-	//app/scripts/filters/tel.js
+**app/scripts/filters/tel.js**
+
 	angular.module('yeomanContactsApp').filter('tel', function () {
 	  return function (input) {
 	    var pattern = /\b[1]?[(-|\(|\.|\s)]?([\d]{3})(-|\)|\.|\s)[\s]?([\d]{3})(-|\.|\s)([\d]{4})\b/g, 
@@ -178,7 +275,8 @@ A custom filter for our application:
 
 A test for our filter: 
 
-	//test/spec/filters/tel.js
+**test/spec/filters/tel.js**
+
 	describe('Filter: tel', function () {
 	
 	  // load the filter's module
@@ -197,10 +295,39 @@ A test for our filter:
 	});
 
 
+#### f. Creating Views `angular:view`
+
+To create custom views for your application use the following command:
+
+	$ yo angular:view contactDirective
+
+Which results in:
+
+* Creates a `contactDirective.html` view skeleton in the `app/views` folder.
+
+
+The custom view for our contact directive:
+
+	<div id="contact-{{$index}}" class="well well-small clearfix">
+		<a class="pull-left thumb" ng-href="/details/{{$index}}">
+			<img class="media-object" ng-src="{{item.avatar}}" src="http://placehold.it/100x100&text=Image" alt="Contact {{item.name}} Image"/>
+		</a>
+		<div class="media-body">
+			<h4 class="media-heading">
+				{{item.name}}
+			</h4>
+			<p class="meta">
+				<ul class="unstyled">
+					<li class="phone"><a ng-href="tel:{{item.phone}}"><i class="icon-phone"></i> {{item.phone | tel}} </a></li>
+					<li class="email"><a ng-href="mailto:{{item.email}}"><i class="icon-envelope"></i> {{item.email}} </a></li>
+				</ul>
+			</p>
+		</div>
+	</div>
 
 
 
-#### d. Creating Services *(angular:service)*
+#### g. Creating Services `angular:service`
 
 	$ yo angular:service contactsService
 	
@@ -212,9 +339,10 @@ Which results in:
 
 A custom service for our application:
 
-	//app/scripts/services/contactsService.js
+**app/scripts/services/contactsService.js**
+
 	angular.module('yeomanContactsApp').factory('ContactsService', ['$q', function($q){
-		Parse.initialize('mNf6N9zKOa0iqoyhXjlnNWQiJATFWkcb5ukvuOkX', 'tjgFaPiYlrTPbNkI0qu62RSl4tE8VH0y0W7yF687');
+		Parse.initialize('YOUR_KEY', 'YOUR_TOKEN');
 		return function(successCb, errorCb){
 			var	query = new Parse.Query('Contact'),
 					delay = $q.defer(),
@@ -252,7 +380,8 @@ A custom service for our application:
 
 A test for our service:
 
-	//@filename - test/spec/services/contactsService.js
+**test/spec/services/contactsService.js**
+
 	describe('Service: contactsService', function () {
 	
 	  // load the service's module
@@ -307,7 +436,19 @@ Building your application is easy, just run the following command:
 
 
 ### 8. Deploying the Project
-Visit the link below to see the deployment.
+For deployment I choose to use [AppFrog](https://www.appfog.com/), make sure you create an account and register your application first and then install the CLI tools.
+
+###### 1. Install CLI Tools:
+
+	sudo gem install af
+	
+###### 2. Login to AppFrog:
+
+	af login
+
+###### 3. Deploy to AppFrog:
+
+	af update jps-contacts
 
 
 ## Resources
@@ -318,6 +459,7 @@ For more information about Yeoman, AngularJS and other technologies used in this
 3. [GruntJS.com](http://gruntjs.com)
 4. [AngularJS.org](http://angularjs.org/)
 5. [Parse.com](https://parse.com/)
+6. [AppFrog](https://www.appfog.com/)
 
 
 
